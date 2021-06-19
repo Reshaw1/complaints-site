@@ -26,5 +26,30 @@ namespace Complaints_BE.Controllers
 
 
         }
+
+        [HttpPost("create")]
+        public IActionResult create(Claim claim)
+        {
+            Complain.Insert(claim.cols, claim.values());
+            return Ok
+                (
+                    @$"CLAIM_ID: {Claim.SelectMax(claim.IDCol)}"
+                );
+        }
+
+        [HttpPut("update")]
+        public IActionResult update(Claim claim)
+        {
+            Claim.Update(claim.changes(), claim.IDCol, claim.ID.Value);
+            return Ok("Claim Modified");
+        }
+
+        [HttpDelete("delete/{id:int}")]
+        public IActionResult delete(int id)
+        {
+            Claim claim = new Claim();
+            Claim.Delete(id, claim.IDCol);
+            return Ok("Claim Deleted");
+        }
     }
 }

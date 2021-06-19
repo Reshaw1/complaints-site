@@ -23,8 +23,31 @@ namespace Complaints_BE.Controllers
             {
                 return Ok(Complain.Select());
             }
+        }
 
+        [HttpPost("create")]
+        public IActionResult create(Complain complain)
+        {
+            Complain.Insert(complain.cols, complain.values());
+            return Ok
+                (
+                    @$"COMPLAIN_ID: {Complain.SelectMax(complain.IDCol)}"
+                );
+        }
 
+        [HttpPut("update")]
+        public IActionResult update(Complain complain)
+        {
+            Complain.Update(complain.changes(), complain.IDCol, complain.ID.Value);
+            return Ok("Complain Modified");
+        }
+
+        [HttpDelete("delete/{id:int}")]
+        public IActionResult delete(int id)
+        {
+            Complain complain = new Complain();
+            Complain.Delete(id, complain.IDCol);
+            return Ok("Complain Deleted");
         }
     }
 }

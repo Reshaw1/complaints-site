@@ -33,7 +33,7 @@ namespace Complaints_BE.Models
                 throw new NotSupportedException(ex.Message);
             }
         }
-        public static void Update(string changes, string id)
+        public static void Update(string changes, string colID, int id)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace Complaints_BE.Models
                 if (_connection.State.Equals(ConnectionState.Closed))
                     _connection.Open();
 
-                _command = new SqlCommand($@"UPDATE {entity} SET {changes} WHERE ({id})", _connection);
+                _command = new SqlCommand($@"UPDATE {entity} SET {changes} WHERE {colID} = {id}", _connection);
 
                 _command.ExecuteNonQuery();
             }
