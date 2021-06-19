@@ -2,13 +2,21 @@
 <mat-toolbar color="primary">
    <mat-toolbar-row>
      <!--  <span>HOME</span> -->
-      <span><a href="/">HOME</a></span>
+     <button mat-button class="nav-button logo-img-container" [routerLinkActive]="['link-active']" [routerLink]="['/home']">
+      <img class="logo-img" src="../../assets/images/logo.png">
+    </button>
+    <div class="title" [routerLink]="['/']">
+      <h1 >Complain Site</h1>
+    </div>
       <span class="spacer"></span>
-      <a  mat-button  routerLink="/register">Register</a>
-      <a  mat-button  routerLink="/login">Login</a>
+  <div *ngIf="login">
+    <button mat-button (click)="onNavComplain()">Quejas</button>
+    <button mat-button (click)="onNavClaim()">Reclamaciones</button>
+  </div>
    </mat-toolbar-row>
 </mat-toolbar>
-<router-outlet></router-outlet>
+<app-login-component *ngIf="!login" (onLogin)="onLogin($event)"></app-login-component>
+<router-outlet *ngIf="login"></router-outlet>
 
 
 

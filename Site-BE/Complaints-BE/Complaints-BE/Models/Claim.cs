@@ -47,12 +47,12 @@ namespace Complaints_BE.Models
         }
         public string changes()
         {
-            return $@"COMPLAIN_DATE = '{date}',
-            COMPLAIN_DESCRIPTION = '{description}',
+            return $@"CLAIM_DATE = '{date}',
+            CLAIM_DESCRIPTION = '{description}',
             PERSON_ID = '{person.ID}',
             DEPARTMENT_ID = '{department.ID}',
-            COMPLAIN_STATE_ID = '{state.ID}',
-            COMPLAIN_TYPE_ID = '{type.ID}'";
+            CLAIM_STATE_ID = '{state.ID}',
+            CLAIM_TYPE_ID = '{type.ID}'";
         }
     }
 }

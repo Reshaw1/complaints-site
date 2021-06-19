@@ -1,20 +1,77 @@
 <mat-toolbar>
-  <span>LOGIN</span>
+  <button mat-button (click)="onUserLogin()">Login</button><button mat-button (click)="onUserRegister()">Register</button>
 </mat-toolbar>
-<mat-card class="my-card">
+<mat-card class="my-card" *ngIf="UserLogin">
    <mat-card-content>
       <form class="my-form">
          <mat-form-field class="full-width">
-            <mat-label>Email</mat-label>
-            <input  matInput  placeholder="Email" name="email">
+            <mat-label>User</mat-label>
+            <input  matInput  placeholder="User" name="user" [(ngModel)]="logUser.userName" #username="ngModel">
          </mat-form-field>
          <mat-form-field class="full-width">
             <mat-label>Password</mat-label>
-            <input  matInput  placeholder="Password" name="password">
+            <input  matInput type="password"  placeholder="Password" name="password" [(ngModel)]="logUser.password" #name="ngModel">
          </mat-form-field>
       </form>
    </mat-card-content>
    <mat-card-actions>
-      <button mat-raised-button (click)="login()" color="primary">LOGIN</button>
+      <button mat-raised-button color="primary" (click)="onLogin()">LOGIN</button>
    </mat-card-actions>
+</mat-card>
+<mat-card class="my-card" *ngIf="UserRegister">
+  <mat-card-content>
+     <form class="my-form">
+        <mat-form-field class="full-width">
+           <mat-label>Name</mat-label>
+           <input  matInput  placeholder="Fullname"  name="fname" [(ngModel)]="logUser.person.name" #fname="ngModel" required>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+           <mat-label>Card ID</mat-label>
+           <input matInput
+                        type="text"
+                        pattern="([0-9]{3})+-([0-9]{7})+-([0-9]{1})"
+                        [(ngModel)]="logUser.person.idCard"
+                        name="cardId"
+                        placeholder="Cedula"
+                        #cardId="ngModel"
+                        required
+                      >
+        </mat-form-field>
+        <mat-form-field class="full-width">
+           <mat-label>Email</mat-label>
+           <input  matInput  placeholder="Email" name="email" required [(ngModel)]="logUser.person.email" #mail="ngModel">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+           <mat-label>Phone</mat-label>
+           <input  matInput  placeholder="phone" name="phone"  required [(ngModel)]="logUser.person.phone" #phone="ngModel">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+         <mat-label>Username</mat-label>
+         <input  matInput  placeholder="Username" name="username" required [(ngModel)]="logUser.userName" #uname="ngModel">
+       </mat-form-field>
+        <mat-form-field class="full-width">
+           <mat-label>Password</mat-label>
+           <input  matInput type="password" placeholder="Password"  name="password2" required [(ngModel)]="logUser.password" #pass2="ngModel">
+        </mat-form-field>
+        <section class="example-section">
+           <label class="full-width">Gender:</label>
+           <br>
+           <br>
+           <mat-radio-group [(ngModel)]="logUser.person.gender" name="gender"  required #gender="ngModel">
+              <mat-radio-button class="example-margin" value="M">Male</mat-radio-button>
+              <mat-radio-button class="example-margin" value="F">Female</mat-radio-button>
+              <mat-radio-button class="example-margin" value="O">Other</mat-radio-button>
+           </mat-radio-group>
+        </section>
+        <mat-form-field class="full-width">
+           <mat-label>Date of Birth</mat-label>
+           <input matInput [matDatepicker]="picker" (click)="picker.open()" required  name="date" placeholder="Choose a date" [(ngModel)]="logUser.person.birthDay" #bday="ngModel">
+           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+           <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+     </form>
+  </mat-card-content>
+  <mat-card-actions>
+     <button mat-raised-button color="primary" (click)="onRegister()">REGISTER</button>
+  </mat-card-actions>
 </mat-card>

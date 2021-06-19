@@ -30,7 +30,7 @@ namespace Complaints_BE.Controllers
         [HttpPost("create")]
         public IActionResult create(Claim claim)
         {
-            Complain.Insert(claim.cols, claim.values());
+            Claim.Insert(claim.cols, claim.values());
             return Ok
                 (
                     @$"CLAIM_ID: {Claim.SelectMax(claim.IDCol)}"

@@ -25,6 +25,19 @@ namespace Complaints_BE.Controllers
             }
         }
 
+        [HttpGet("getPersons")]
+        public IActionResult getPersons()
+        {
+            if (Person.Select().Count.Equals(0))
+            {
+                return Ok("Empty");
+            }
+            else
+            {
+                return Ok(Person.Select());
+            }
+        }
+
         [HttpPost("create")]
         public IActionResult create(Complain complain)
         {

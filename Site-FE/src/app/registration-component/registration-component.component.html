@@ -3,7 +3,7 @@
 </mat-toolbar>
 <mat-card class="my-card">
    <mat-card-content>
-      <form class="my-form">  
+      <form class="my-form">
          <mat-form-field class="full-width">
             <mat-label>First Name</mat-label>
             <input  matInput  placeholder="First name"  name="fname"  required>
@@ -21,6 +21,10 @@
             <input  matInput  placeholder="Email" name="email">
          </mat-form-field>
          <mat-form-field class="full-width">
+          <mat-label>Username</mat-label>
+          <input  matInput  placeholder="Email" name="email">
+        </mat-form-field>
+         <mat-form-field class="full-width">
             <mat-label>Password</mat-label>
             <input  matInput  placeholder="Password"  name="password">
          </mat-form-field>
@@ -29,9 +33,9 @@
             <br>
             <br>
             <mat-radio-group>
-               <mat-radio-button class="example-margin" value="after">Male</mat-radio-button>
-               <mat-radio-button class="example-margin" value="before">Female</mat-radio-button>
-               <mat-radio-button class="example-margin" value="before">Other</mat-radio-button>
+               <mat-radio-button class="example-margin" value="Male">Male</mat-radio-button>
+               <mat-radio-button class="example-margin" value="Female">Female</mat-radio-button>
+               <mat-radio-button class="example-margin" value="Other">Other</mat-radio-button>
             </mat-radio-group>
          </section>
          <mat-form-field class="full-width">

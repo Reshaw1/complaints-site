@@ -1,0 +1,3 @@
+<input matInput [matDatepicker]="picker" (click)="picker.open()" required  name="date" placeholder="Choose a date" [(ngModel)]="date" (dateChange)="onSelectionChanged($event)" #bday="ngModel">
+<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+<mat-datepicker #picker></mat-datepicker>

@@ -1,0 +1,47 @@
+<mat-card>
+  <mat-card-title>
+    Insertar Reclamacion
+  </mat-card-title>
+  <mat-card-content class="card-content">
+    <form #Claimform="ngForm">
+      <div class="input-container">
+        <mat-form-field>
+          <mat-label>Departamento</mat-label>
+          <mat-select
+          [(ngModel)]="Department.ID"
+          name="department"
+          [(value)]="Department.ID"
+          required
+          #department="ngModel">
+            <mat-option *ngFor="let item of Departments" [value]="item.ID">
+              {{item.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        </div>
+        <div class="input-container">
+          <mat-form-field>
+            <mat-label>Tipo de Reclamacion</mat-label>
+            <mat-select
+            name="ClaimType"
+            [(value)]="ClaimType.ID"
+            required>
+              <mat-option *ngFor="let item of ClaimTypes" [value]="item.ID">
+                {{item.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="input-container" class="Claimdescription">
+          <mat-form-field appearance="fill" class="description">
+              <mat-label>Descripcion de Reclamacion</mat-label>
+              <textarea matInput class="description" [(ngModel)]="Claim.description" name="description" #description="ngModel" required>
+              </textarea>
+          </mat-form-field>
+        </div>
+        <div>
+          <button mat-raised-button color="primary" (click)="onCreateClaim()" [disabled]="Claimform.invalid" >Crear Reclamacion</button>
+        </div>
+    </form>
+  </mat-card-content>
+</mat-card>

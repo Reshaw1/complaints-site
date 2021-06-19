@@ -1,0 +1,5 @@
+<mat-select name="risk" [(value)]="department.ID" (selectionChange)="onSelectionChanged($event)" required>
+  <mat-option *ngFor="let item of departments" [value]="item.ID">
+      {{item.name}}
+  </mat-option>
+</mat-select>
