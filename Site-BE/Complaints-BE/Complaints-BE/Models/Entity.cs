@@ -27,6 +27,7 @@ namespace Complaints_BE.Models
                 _command = new SqlCommand($@"INSERT INTO {entity} ({cols}) VALUES ({values})", _connection);
 
                 _command.ExecuteNonQuery();
+                _connection.Close();
             }
             catch (Exception ex)
             {
@@ -44,6 +45,7 @@ namespace Complaints_BE.Models
                 _command = new SqlCommand($@"UPDATE {entity} SET {changes} WHERE {colID} = {id}", _connection);
 
                 _command.ExecuteNonQuery();
+                _connection.Close();
             }
             catch (Exception ex)
             {
@@ -62,6 +64,7 @@ namespace Complaints_BE.Models
                 _command = new SqlCommand($@"DELETE FROM {entity} WHERE {colID} = {id}", _connection);
 
                 _command.ExecuteNonQuery();
+                _connection.Close();
             }
             catch (Exception ex)
             {
@@ -91,7 +94,8 @@ namespace Complaints_BE.Models
                     }
                     list2.Add(list);
                 }
-                    
+
+                _connection.Close();
                 return list2;
             }
             catch (Exception ex)
@@ -116,7 +120,8 @@ namespace Complaints_BE.Models
 
                 while (_reader.Read())
                    id = int.Parse(_reader[idcol].ToString());
-                
+
+                _connection.Close();
                 return id;
             }
             catch (Exception ex)
