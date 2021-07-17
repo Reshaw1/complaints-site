@@ -24,7 +24,31 @@ namespace Complaints_BE.Controllers
                 return Ok(Claim_Type.Select());
             }
 
+        }
 
+        [HttpPost("create")]
+        public IActionResult create(Claim_Type claimtype)
+        {
+            Claim_Type.Insert(claimtype.cols, claimtype.values());
+            return Ok
+                (
+                    @$"CLAIM_TYPE_ID: {Claim_Type.SelectMax(claimtype.IDCol)}"
+                );
+        }
+
+        [HttpPut("update")]
+        public IActionResult update(Claim_Type claimtype)
+        {
+            Claim_Type.Update(claimtype.changes(), claimtype.IDCol, claimtype.ID.Value);
+            return Ok("Claim Type Modified");
+        }
+
+        [HttpDelete("delete/{id:int}")]
+        public IActionResult delete(int id)
+        {
+            Claim_Type claimtype = new Claim_Type();
+            Claim_Type.Delete(id, claimtype.IDCol);
+            return Ok("Claim Type Deleted");
         }
     }
 }

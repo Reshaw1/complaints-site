@@ -10,44 +10,46 @@ namespace Complaints_BE.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DepartmentController : ControllerBase
+    public class ProductController : ControllerBase
     {
         [HttpGet("get")]
         public IActionResult get()
         {
-            if (Department.Select().Count.Equals(0))
+            if (Product.Select().Count.Equals(0))
             {
                 return Ok("Empty");
             }
             else
             {
-                return Ok(Department.Select());
+                return Ok(Product.Select());
             }
+
+
         }
 
         [HttpPost("create")]
-        public IActionResult create(Department department)
+        public IActionResult create(Product product)
         {
-            Department.Insert(department.cols, department.values());
+            Product.Insert(product.cols, product.values());
             return Ok
                 (
-                    @$"DEPARTMENT_ID: {Department.SelectMax(department.IDCol)}"
+                    @$"PRODUCT_ID: {Product.SelectMax(product.IDCol)}"
                 );
         }
 
         [HttpPut("update")]
-        public IActionResult update(Department department)
+        public IActionResult update(Product product)
         {
-            Department.Update(department.changes(), department.IDCol, department.ID.Value);
-            return Ok("Department Modified");
+            Product.Update(product.changes(), product.IDCol, product.ID.Value);
+            return Ok("Product Modified");
         }
 
         [HttpDelete("delete/{id:int}")]
         public IActionResult delete(int id)
         {
-            Department department = new Department();
-            Department.Delete(id, department.IDCol);
-            return Ok("Department Deleted");
+            Product product = new Product();
+            Product.Delete(id, product.IDCol);
+            return Ok("Product Deleted");
         }
     }
 }

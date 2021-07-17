@@ -10,45 +10,45 @@ namespace Complaints_BE.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClaimStateController : ControllerBase
+    public class ProductTypeController : ControllerBase
     {
         [HttpGet("get")]
         public IActionResult get()
         {
-            if (Claim_State.Select().Count.Equals(0))
+            if (Product_Type.Select().Count.Equals(0))
             {
                 return Ok("Empty");
             }
             else
             {
-                return Ok(Claim_State.Select());
+                return Ok(Product_Type.Select());
             }
 
         }
 
         [HttpPost("create")]
-        public IActionResult create(Claim_State claimstate)
+        public IActionResult create(Product_Type producttype)
         {
-            Claim_State.Insert(claimstate.cols, claimstate.values());
+            Product_Type.Insert(producttype.cols, producttype.values());
             return Ok
                 (
-                    @$"CLAIM_STATE_ID: {Claim_State.SelectMax(claimstate.IDCol)}"
+                    @$"PRODUCT_TYPE_ID: {Product_Type.SelectMax(producttype.IDCol)}"
                 );
         }
 
         [HttpPut("update")]
-        public IActionResult update(Claim_State claimstate)
+        public IActionResult update(Product_Type producttype)
         {
-            Claim_State.Update(claimstate.changes(), claimstate.IDCol, claimstate.ID.Value);
-            return Ok("Claim State Modified");
+            Product_Type.Update(producttype.changes(), producttype.IDCol, producttype.ID.Value);
+            return Ok("Product Type Modified");
         }
 
         [HttpDelete("delete/{id:int}")]
         public IActionResult delete(int id)
         {
-            Claim_State claimstate = new Claim_State();
-            Claim_State.Delete(id, claimstate.IDCol);
-            return Ok("Claim State Deleted");
+            Product_Type producttype = new Product_Type();
+            Product_Type.Delete(id, producttype.IDCol);
+            return Ok("Product Type Deleted");
         }
     }
 }

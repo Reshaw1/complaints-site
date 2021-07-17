@@ -5,26 +5,26 @@ using System.Threading.Tasks;
 
 namespace Complaints_BE.Models
 {
-    public class Department : Entity<Department>
+    public class Product_State : Entity<Product_State>
     {
-        public string name { get; set; }
+        string state { get; set; }
 
-        public string IDCol = "DEPARTMENT_ID";
+        public string IDCol = "PRODUCT_STATE_ID";
 
         public string colsID = @"
-        DEPARTMENT_ID,
-	    DEPARTMENT_NAME";
+        PRODUCT_STATE_ID,
+	    PRODUCT_STATE";
 
         public string cols = @"
-	    DEPARTMENT_NAME";
+	    PRODUCT_STATE";
 
         public string values()
         {
-            return $@"'{name}'";
+            return $@"'{state}'";
         }
         public string changes()
         {
-            return $@"DEPARTMENT_NAME = '{name}'";
+            return $@"PRODUCT_STATE = '{state}'";
         }
     }
 }
