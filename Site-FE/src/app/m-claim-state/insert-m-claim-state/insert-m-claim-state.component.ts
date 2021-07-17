@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Claim_State } from 'src/app/models/Claim_State';
+import { ClaimStateService } from '../claim-state.service';
 
 @Component({
   selector: 'app-insert-m-claim-state',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InsertMClaimStateComponent implements OnInit {
 
-  constructor() { }
+  claimState: Claim_State;
+
+
+  constructor(private claimStateService: ClaimStateService) { }
 
   ngOnInit(): void {
+    this.claimState = new Claim_State;
   }
 
+  onCreateClaimState() {
+    console.log(JSON.parse(JSON.stringify(this.claimState)));
+    this.claimStateService.createClaimState(this.claimState).subscribe(res => {
+      window.alert("Se ha insertado Correctamente")
+    })
+  }
 }

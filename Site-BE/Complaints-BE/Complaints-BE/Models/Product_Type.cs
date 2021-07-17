@@ -7,7 +7,7 @@ namespace Complaints_BE.Models
 {
     public class Product_Type : Entity<Product_Type>
     {
-        string type { get; set; }
+        public string type { get; set; }
 
         public string IDCol = "PRODUCT_TYPE_ID";
 

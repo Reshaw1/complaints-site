@@ -7,7 +7,7 @@ namespace Complaints_BE.Models
 {
     public class Claim_Type : Entity<Claim_Type>
     {
-        string type { get; set; }
+        public string type { get; set; }
 
         public string IDCol = "CLAIM_TYPE_ID";
 

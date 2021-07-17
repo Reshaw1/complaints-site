@@ -1,0 +1,16 @@
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 50%;
+}
+
+.description {
+  height: 40vh;
+  width: 100%;
+}
+
+.input-d-name {
+  width: 20vw;
+}

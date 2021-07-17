@@ -1,1 +1,19 @@
-<p>insert-m-claim-state works!</p>
+<mat-card>
+  <mat-card-title>
+    Insertar Estado de Reclamacion
+  </mat-card-title>
+  <mat-card-content class="card-content">
+    <form #claimStateForm="ngForm">
+      <div class="input-container">
+        <mat-form-field class="input-d-name">
+          <mat-label>Estado de Reclamacion</mat-label>
+          <input  matInput type="text" name="claimState" [(ngModel)]="claimState.state" #TclaimState="ngModel">
+        </mat-form-field>
+        </div>
+        <div>
+          <button mat-raised-button color="primary" (click)="onCreateClaimState()" [disabled]="claimStateForm.invalid" >Crear Estado de Reclamacion</button>
+        </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+

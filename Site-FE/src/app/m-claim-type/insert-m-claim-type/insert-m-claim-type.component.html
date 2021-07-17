@@ -1,1 +1,18 @@
-<p>insert-m-claim-type works!</p>
+<mat-card>
+  <mat-card-title>
+    Insertar Tipo de Reclamacion
+  </mat-card-title>
+  <mat-card-content class="card-content">
+    <form #claimTypeForm="ngForm">
+      <div class="input-container">
+        <mat-form-field class="input-d-name">
+          <mat-label>Tipo de Queja</mat-label>
+          <input  matInput type="text" name="claimType" [(ngModel)]="claimType.type" #TclaimType="ngModel">
+        </mat-form-field>
+        </div>
+        <div>
+          <button mat-raised-button color="primary" (click)="onCreateClaimType()" [disabled]="claimTypeForm.invalid" >Crear Tipo de Reclamacion</button>
+        </div>
+    </form>
+  </mat-card-content>
+</mat-card>

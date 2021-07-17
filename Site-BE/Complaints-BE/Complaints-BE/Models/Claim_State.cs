@@ -7,7 +7,7 @@ namespace Complaints_BE.Models
 {
     public class Claim_State : Entity<Claim_State>
     {
-        string state { get; set; }
+        public string state { get; set; }
 
         public string IDCol = "CLAIM_STATE_ID";
 

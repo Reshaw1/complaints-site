@@ -1,1 +1,18 @@
-<p>insert-m-complain-type works!</p>
+<mat-card>
+  <mat-card-title>
+    Insertar Tipo de Queja
+  </mat-card-title>
+  <mat-card-content class="card-content">
+    <form #complainTypeForm="ngForm">
+      <div class="input-container">
+        <mat-form-field class="input-d-name">
+          <mat-label>Tipo de Queja</mat-label>
+          <input  matInput type="text" name="complainType" [(ngModel)]="complainType.type" #TcomplainType="ngModel">
+        </mat-form-field>
+        </div>
+        <div>
+          <button mat-raised-button color="primary" (click)="onCreateComplainType()" [disabled]="complainTypeForm.invalid" >Crear Tipo de Queja</button>
+        </div>
+    </form>
+  </mat-card-content>
+</mat-card>
