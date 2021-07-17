@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GridOptions } from 'ag-grid-community';
 import { ComplainStateComponent } from 'src/app/cell-renderers/complain-state/complain-state.component';
 import { ComplainTypeComponent } from 'src/app/cell-renderers/complain-type/complain-type.component';
@@ -29,17 +29,19 @@ export class ViewComplainComponent implements OnInit {
   complains: Complain[] = [];
   complain: Complain;
 
+  personId: number
+
   columnDefs = [
-    { field: 'description', headerName: 'Descripcion', colId: "0", width: 400, filter: "agTextColumnFilter", filterParams: DataGridFunctions.CodeFilterParams},
-    { field: 'person.ID', headerName: 'Person', colId: "1", width: 250, editable: false, cellRenderer: 'personCellRenderer'},
+    { field: 'description', headerName: 'Descripcion', colId: "0", width: 400, filter: "agTextColumnFilter", filterParams: DataGridFunctions.CodeFilterParams, editable: true},
+    //{ field: 'person.ID', headerName: 'Person', colId: "1", width: 250, editable: false, cellRenderer: 'personCellRenderer'},
     { field: 'date', headerName: 'Fecha', colId: "2", width: 300, filter: "agDateColumnFilter", cellRenderer: "dateCellRenderer" },
-    { field: 'department.ID', headerName: 'Departamento', colId: "3", width: 300, cellRenderer: 'departmentCellRenderer'},
-    { field: 'type.ID', headerName: 'Tipo', colId: "4", width: 225, cellRenderer: 'complainTypeCellRenderer'},
-    { field: "state.ID", headerName: 'Estado', width: 300, colId: "8", cellRenderer: 'complainStateCellRenderer', editable: false},
+    { field: 'department.ID', headerName: 'Departamento', colId: "3", width: 250, cellRenderer: 'departmentCellRenderer'},
+    { field: 'type.ID', headerName: 'Tipo', colId: "4", width: 300, cellRenderer: 'complainTypeCellRenderer'},
+    { field: "state.ID", headerName: 'Estado', width: 225, colId: "8", cellRenderer: 'complainStateCellRenderer', editable: false},
     {
       field: "Gestionar",
       headerName: "",
-      width: 200,
+      width: 100,
       colId: "5",
       checkboxSelection: true,
       editable: false,
@@ -62,9 +64,12 @@ export class ViewComplainComponent implements OnInit {
   constructor(
     private complainService: ComplainService,
     private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.personId = parseInt(this.route.snapshot.queryParamMap.get("personId"))
+
     this.complain = new Complain();
     this.complain.department = new Department;
     this.complain.person = new Person;
@@ -74,14 +79,16 @@ export class ViewComplainComponent implements OnInit {
       console.log(res);
       for(let i of res) {
 
-        this.complain.ID = i[0],
-        this.complain.date = i[1],
-        this.complain.description = i[2],
-        this.complain.person.ID = i[3],
-        this.complain.department.ID = i[4],
-        this.complain.state.ID = i[5],
-        this.complain.type.ID = i[6],
-        this.complains.push(this.complain);
+        this.complain.ID = i[0];
+        this.complain.date = i[1];
+        this.complain.description = i[2];
+        this.complain.person.ID = i[3];
+        this.complain.department.ID = i[4];
+        this.complain.state.ID = i[5];
+        this.complain.type.ID = i[6];
+        if(this.complain.person.ID == this.personId) {
+          this.complains.push(this.complain);
+        }
         this.complain = new Complain();
         this.complain.department = new Department;
         this.complain.person = new Person;
@@ -182,7 +189,8 @@ export class ViewComplainComponent implements OnInit {
       this.complain.type = new Complain_Type;
       row2 = this.gridOptions.api.getDisplayedRowAtIndex(x);
       this.complain.description = this.gridOptions.api.getValue("0", row2);
-      this.complain.person.ID = parseInt(this.gridOptions.api.getValue("1", row2));
+      this.complain.person.ID = this.personId;
+      //parseInt(this.gridOptions.api.getValue("1", row2));
       this.complain.date = new Date(this.gridOptions.api.getValue("2", row2));
       this.complain.department.ID = parseInt(this.gridOptions.api.getValue("3", row2));
       this.complain.type.ID = parseInt(this.gridOptions.api.getValue("4", row2));

@@ -34,7 +34,7 @@ export class ComplainTypeComponent implements AgRendererComponent {
     this.complainService.getComplainType().subscribe((res: any) => {
       for(let i of res) {
         this.complainType.ID = i[0],
-        this.complainType.name = i[1],
+        this.complainType.type = i[1],
         this.complainTypes.push(this.complainType);
         this.complainType = new Complain_Type();
       }

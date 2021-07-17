@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GridOptions } from 'ag-grid-community';
 import { ClaimStateComponent } from 'src/app/cell-renderers/claim-state/claim-state.component';
 import { ClaimTypeComponent } from 'src/app/cell-renderers/claim-type/claim-type.component';
@@ -30,17 +30,19 @@ export class ViewClaimComponent implements OnInit {
   claims: Claim[] = [];
   claim: Claim;
 
+  personId: number
+
   columnDefs = [
-    { field: 'description', headerName: 'Descripcion', colId: "0", width: 400, filter: "agTextColumnFilter", filterParams: DataGridFunctions.CodeFilterParams},
-    { field: 'person.ID', headerName: 'Person', colId: "1", width: 250, editable: false, cellRenderer: 'personCellRenderer'},
+    { field: 'description', headerName: 'Descripcion', colId: "0", width: 400, filter: "agTextColumnFilter", filterParams: DataGridFunctions.CodeFilterParams, editable: true},
+    //{ field: 'person.ID', headerName: 'Person', colId: "1", width: 250, editable: false, cellRenderer: 'personCellRenderer'},
     { field: 'date', headerName: 'Fecha', colId: "2", width: 300, filter: "agDateColumnFilter", cellRenderer: "dateCellRenderer" },
-    { field: 'department.ID', headerName: 'Departamento', colId: "3", width: 300, cellRenderer: 'departmentCellRenderer'},
-    { field: 'type.ID', headerName: 'Tipo', colId: "4", width: 225, cellRenderer: 'claimTypeCellRenderer'},
-    { field: "state.ID", headerName: 'Estado', width: 300, colId: "8", cellRenderer: 'claimStateCellRenderer', editable: false},
+    { field: 'department.ID', headerName: 'Departamento', colId: "3", width: 250, cellRenderer: 'departmentCellRenderer'},
+    { field: 'type.ID', headerName: 'Tipo', colId: "4", width: 300, cellRenderer: 'claimTypeCellRenderer'},
+    { field: "state.ID", headerName: 'Estado', width: 225, colId: "8", cellRenderer: 'claimStateCellRenderer', editable: false},
     {
       field: "Gestionar",
       headerName: "",
-      width: 200,
+      width: 100,
       colId: "5",
       checkboxSelection: true,
       editable: false,
@@ -63,10 +65,12 @@ export class ViewClaimComponent implements OnInit {
   constructor(
     private complainService: ComplainService,
     private router: Router,
+    private route: ActivatedRoute,
     private claimService: ClaimService,
   ) { }
 
   ngOnInit(): void {
+    this.personId = parseInt(this.route.snapshot.queryParamMap.get("personId"))
     this.claim = new Claim();
     this.claim.department = new Department;
     this.claim.person = new Person;
@@ -76,14 +80,16 @@ export class ViewClaimComponent implements OnInit {
       console.log(res);
       for(let i of res) {
 
-        this.claim.ID = i[0],
-        this.claim.date = i[1],
-        this.claim.description = i[2],
-        this.claim.person.ID = i[3],
-        this.claim.department.ID = i[4],
-        this.claim.state.ID = i[5],
-        this.claim.type.ID = i[6],
-        this.claims.push(this.claim);
+        this.claim.ID = i[0];
+        this.claim.date = i[1];
+        this.claim.description = i[2];
+        this.claim.person.ID = i[3];
+        this.claim.department.ID = i[4];
+        this.claim.state.ID = i[5];
+        this.claim.type.ID = i[6];
+        if(this.claim.person.ID == this.personId) {
+          this.claims.push(this.claim);
+        }
         this.claim = new Claim();
         this.claim.department = new Department;
         this.claim.person = new Person;
@@ -184,7 +190,8 @@ export class ViewClaimComponent implements OnInit {
       this.claim.type = new Claim_Type;
       row2 = this.gridOptions.api.getDisplayedRowAtIndex(x);
       this.claim.description = this.gridOptions.api.getValue("0", row2);
-      this.claim.person.ID = parseInt(this.gridOptions.api.getValue("1", row2));
+      this.claim.person.ID = this.personId;
+      //parseInt(this.gridOptions.api.getValue("1", row2));
       this.claim.date = new Date(this.gridOptions.api.getValue("2", row2));
       this.claim.department.ID = parseInt(this.gridOptions.api.getValue("3", row2));
       this.claim.type.ID = parseInt(this.gridOptions.api.getValue("4", row2));

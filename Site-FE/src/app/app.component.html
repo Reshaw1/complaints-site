@@ -9,9 +9,18 @@
       <h1 >Complain Site</h1>
     </div>
       <span class="spacer"></span>
-  <div *ngIf="login">
+  <div *ngIf="login && user_Type == 2">
     <button mat-button (click)="onNavComplain()">Quejas</button>
     <button mat-button (click)="onNavClaim()">Reclamaciones</button>
+  </div>
+  <div *ngIf="login && user_Type == 1">
+    <button mat-button (click)="onNavMComplain()">Quejas</button>
+    <button mat-button (click)="onNavMComplainType()">Tipo de Queja</button>
+    <button mat-button (click)="onNavMComplainState()">Estado de Queja</button>
+    <button mat-button (click)="onNavMClaim()">Reclamaciones</button>
+    <button mat-button (click)="onNavMClaimType()">Tipo de Reclamacion</button>
+    <button mat-button (click)="onNavMClaimState()">Estado de Reclamacion</button>
+    <button mat-button (click)="onNavMDepartment()">Departamento</button>
   </div>
    </mat-toolbar-row>
 </mat-toolbar>

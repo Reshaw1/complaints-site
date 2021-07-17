@@ -48,7 +48,7 @@ export class InsertClaimComponent implements OnInit {
   this.ClaimService.getClaimType().subscribe((res: any) => {
     for(let i of res) {
       this.ClaimType.ID = i[0],
-      this.ClaimType.name = i[1],
+      this.ClaimType.type = i[1],
       this.ClaimTypes.push(this.ClaimType);
       this.ClaimType = new Claim_Type();
     }
@@ -57,7 +57,7 @@ export class InsertClaimComponent implements OnInit {
   this.ClaimService.getClaimState().subscribe((res: any) => {
     for(let i of res) {
       this.ClaimState.ID = i[0],
-      this.ClaimState.name = i[1],
+      this.ClaimState.state = i[1],
       this.ClaimStates.push(this.ClaimState);
       this.ClaimState = new Claim_State();
     }

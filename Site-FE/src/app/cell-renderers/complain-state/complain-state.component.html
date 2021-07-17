@@ -1,5 +1,5 @@
 <mat-select name="risk" [(value)]="complainState.ID" (selectionChange)="onSelectionChanged($event)" required>
   <mat-option *ngFor="let item of complainStates" [value]="item.ID">
-      {{item.name}}
+      {{item.state}}
   </mat-option>
 </mat-select>

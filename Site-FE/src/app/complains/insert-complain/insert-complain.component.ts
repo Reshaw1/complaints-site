@@ -49,7 +49,7 @@ export class InsertComplainComponent implements OnInit {
   this.complainService.getComplainType().subscribe((res: any) => {
     for(let i of res) {
       this.ComplainType.ID = i[0],
-      this.ComplainType.name = i[1],
+      this.ComplainType.type = i[1],
       this.ComplainTypes.push(this.ComplainType);
       this.ComplainType = new Complain_Type();
     }
@@ -58,7 +58,7 @@ export class InsertComplainComponent implements OnInit {
   this.complainService.getComplainState().subscribe((res: any) => {
     for(let i of res) {
       this.ComplainState.ID = i[0],
-      this.ComplainState.name = i[1],
+      this.ComplainState.state = i[1],
       this.ComplainStates.push(this.ComplainState);
       this.ComplainState = new Complain_State();
     }

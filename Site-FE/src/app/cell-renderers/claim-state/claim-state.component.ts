@@ -34,7 +34,7 @@ export class ClaimStateComponent implements AgRendererComponent {
     this.claimService.getClaimState().subscribe((res: any) => {
       for(let i of res) {
         this.claimState.ID = i[0],
-        this.claimState.name = i[1],
+        this.claimState.state = i[1],
         this.claimStates.push(this.claimState);
         this.claimState = new Claim_State();
       }

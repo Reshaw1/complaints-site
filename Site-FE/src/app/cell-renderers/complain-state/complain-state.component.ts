@@ -34,7 +34,7 @@ export class ComplainStateComponent implements AgRendererComponent {
     this.complainService.getComplainState().subscribe((res: any) => {
       for(let i of res) {
         this.complainState.ID = i[0],
-        this.complainState.name = i[1],
+        this.complainState.state = i[1],
         this.complainStates.push(this.complainState);
         this.complainState = new Complain_State();
       }

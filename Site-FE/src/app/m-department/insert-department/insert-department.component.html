@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-card-title>
+    Insertar Departmento
+  </mat-card-title>
+  <mat-card-content class="card-content">
+    <form #departmentForm="ngForm">
+      <div class="input-container">
+        <mat-form-field class="input-d-name">
+          <mat-label>Nombre del Departamento</mat-label>
+          <input  matInput type="text" name="department" [(ngModel)]="department.name" #dname="ngModel">
+        </mat-form-field>
+        </div>
+        <div>
+          <button mat-raised-button color="primary" (click)="onCreateDepartment()" [disabled]="departmentForm.invalid" >Crear Departamento</button>
+        </div>
+    </form>
+  </mat-card-content>
+</mat-card>

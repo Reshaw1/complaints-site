@@ -10,7 +10,7 @@ import { LoginService } from './login.service';
 })
 export class LoginComponentComponent implements OnInit {
 
-  @Output("onLogin") login = new EventEmitter<number>();
+  @Output("onLogin") login = new EventEmitter<any>();
 
   UserLogin: boolean = true;
   UserRegister: boolean = false;
@@ -33,8 +33,8 @@ export class LoginComponentComponent implements OnInit {
         this.user.userName = i[1],
         this.user.password = i[2],
         this.user.person.ID = i[3],
-        this.user.userType = i[4],
-        this.user.userState = i[5],
+        this.user.userState = i[4],
+        this.user.userType = i[5],
         this.Users.push(this.user);
       }
       console.log(this.Users);
@@ -44,7 +44,7 @@ export class LoginComponentComponent implements OnInit {
   onLogin() {
     for(let user of this.Users){
       if(this.logUser.userName == user.userName && this.logUser.password == user.password) {
-        this.login.emit(user.person.ID)
+        this.login.emit([user.person.ID, user.userType])
         break
       }
     }

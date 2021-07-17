@@ -35,7 +35,7 @@ export class ClaimTypeComponent implements AgRendererComponent {
     this.claimService.getClaimType().subscribe((res: any) => {
       for(let i of res) {
         this.claimType.ID = i[0],
-        this.claimType.name = i[1],
+        this.claimType.type = i[1],
         this.claimTypes.push(this.claimType);
         this.claimType = new Claim_Type();
       }
