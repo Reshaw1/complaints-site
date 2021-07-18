@@ -11,6 +11,7 @@ import { MComplainTypeComponent } from './m-complain-type/m-complain-type.compon
 import { MComplainsComponent } from './m-complains/m-complains.component';
 import { MDepartmentComponent } from './m-department/department.component';
 import { RegistrationComponentComponent } from './registration-component/registration-component.component';
+import { ResponseComponent } from './response/response.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,10 @@ const routes: Routes = [
   {
     path: "m-department",
     component: MDepartmentComponent,
+  },
+  {
+    path: "response",
+    component: ResponseComponent,
   },
 ];
 

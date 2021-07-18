@@ -12,6 +12,8 @@ import { Claim_State } from 'src/app/models/Claim_State';
 import { Claim_Type } from 'src/app/models/Claim_Type';
 import { Department } from 'src/app/models/Department';
 import { Person } from 'src/app/models/Person';
+import { CResponse } from 'src/app/models/Response';
+import { ResponseService } from 'src/app/response/response.service';
 import { DataGridFunctions } from 'src/app/utilities/DataGridFunctions';
 import { ClaimService } from '../../claims/claim.service';
 
@@ -24,17 +26,22 @@ export class ViewMClaimComponent implements OnInit {
   selection: boolean = false;
   gridEdited: boolean = false;
   value = '';
+
+  showAnswer: boolean = false;
   // columnApi: any;
   gridOptions: GridOptions;
 
   claims: Claim[] = [];
   claim: Claim;
 
+  responses: CResponse[];
+  response: CResponse;
+
   personId: number
 
   columnDefs = [
     { field: 'description', headerName: 'Descripcion', colId: "0", width: 400, filter: "agTextColumnFilter", filterParams: DataGridFunctions.CodeFilterParams, editable: true},
-    //{ field: 'person.ID', headerName: 'Person', colId: "1", width: 250, editable: false, cellRenderer: 'personCellRenderer'},
+    { field: 'person.ID', headerName: 'Person', colId: "1", width: 250, hide: true, editable: false, cellRenderer: 'personCellRenderer'},
     { field: 'date', headerName: 'Fecha', colId: "2", width: 300, filter: "agDateColumnFilter", cellRenderer: "dateCellRenderer" },
     { field: 'department.ID', headerName: 'Departamento', colId: "3", width: 300, cellRenderer: 'departmentCellRenderer'},
     { field: 'type.ID', headerName: 'Tipo', colId: "4", width: 225, cellRenderer: 'claimTypeCellRenderer'},
@@ -67,6 +74,7 @@ export class ViewMClaimComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private claimService: ClaimService,
+    private responseService: ResponseService,
   ) { }
 
   ngOnInit(): void {
@@ -76,6 +84,7 @@ export class ViewMClaimComponent implements OnInit {
     this.claim.person = new Person;
     this.claim.state = new Claim_State;
     this.claim.type = new Claim_Type;
+
     this.claimService.getClaims().subscribe((res: any) => {
       console.log(res);
       for(let i of res) {
@@ -188,8 +197,7 @@ export class ViewMClaimComponent implements OnInit {
       this.claim.type = new Claim_Type;
       row2 = this.gridOptions.api.getDisplayedRowAtIndex(x);
       this.claim.description = this.gridOptions.api.getValue("0", row2);
-      this.claim.person.ID = this.personId;
-      //parseInt(this.gridOptions.api.getValue("1", row2));
+      this.claim.person.ID = parseInt(this.gridOptions.api.getValue("1", row2));
       this.claim.date = new Date(this.gridOptions.api.getValue("2", row2));
       this.claim.department.ID = parseInt(this.gridOptions.api.getValue("3", row2));
       this.claim.type.ID = parseInt(this.gridOptions.api.getValue("4", row2));
@@ -240,5 +248,24 @@ export class ViewMClaimComponent implements OnInit {
     //       })
     //   })
     // }
+  }
+
+  onDisplayAnswer() {
+    console.log("display answer")
+    this.showAnswer =  true
+    this.response = new CResponse;
+    this.response.claim = new Claim;
+    this.response.date = new Date;
+    this.response.person = new Person;
+    var selectedRows = this.gridOptions.api.getSelectedRows();
+    this.response.person.ID = this.personId;
+    this.response.claim.ID = parseInt(selectedRows[0].ID);
+  }
+
+  onCreateResponse() {
+    console.log(this.response);
+    this.responseService.createResponse(this.response).subscribe(res => {
+      this.showAnswer = false;
+    })
   }
 }

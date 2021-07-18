@@ -33,7 +33,7 @@ export class ViewComplainComponent implements OnInit {
 
   columnDefs = [
     { field: 'description', headerName: 'Descripcion', colId: "0", width: 400, filter: "agTextColumnFilter", filterParams: DataGridFunctions.CodeFilterParams, editable: true},
-    //{ field: 'person.ID', headerName: 'Person', colId: "1", width: 250, editable: false, cellRenderer: 'personCellRenderer'},
+    { field: 'person.ID', headerName: 'Person', colId: "1", width: 250, hide: true, editable: false, cellRenderer: 'personCellRenderer'},
     { field: 'date', headerName: 'Fecha', colId: "2", width: 300, filter: "agDateColumnFilter", cellRenderer: "dateCellRenderer" },
     { field: 'department.ID', headerName: 'Departamento', colId: "3", width: 250, cellRenderer: 'departmentCellRenderer'},
     { field: 'type.ID', headerName: 'Tipo', colId: "4", width: 300, cellRenderer: 'complainTypeCellRenderer'},
@@ -189,8 +189,7 @@ export class ViewComplainComponent implements OnInit {
       this.complain.type = new Complain_Type;
       row2 = this.gridOptions.api.getDisplayedRowAtIndex(x);
       this.complain.description = this.gridOptions.api.getValue("0", row2);
-      this.complain.person.ID = this.personId;
-      //parseInt(this.gridOptions.api.getValue("1", row2));
+      this.complain.person.ID = parseInt(this.gridOptions.api.getValue("1", row2));
       this.complain.date = new Date(this.gridOptions.api.getValue("2", row2));
       this.complain.department.ID = parseInt(this.gridOptions.api.getValue("3", row2));
       this.complain.type.ID = parseInt(this.gridOptions.api.getValue("4", row2));

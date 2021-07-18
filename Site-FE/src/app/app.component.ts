@@ -106,4 +106,16 @@ export class AppComponent {
         userType: this.user_Type },
     });
   }
+
+  onNavResponse() {
+    this.router.navigate(["/response"], {
+      queryParams: {
+        personId: this.person_ID,
+        userType: this.user_Type },
+    });
+  }
+
+  onNavLogout() {
+    this.login = false;
+  }
 }

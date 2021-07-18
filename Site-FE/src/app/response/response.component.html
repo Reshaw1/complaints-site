@@ -1,1 +1,23 @@
-<p>response works!</p>
+<div class="main-background">
+  <mat-card class="card">
+    <mat-card-title>
+      Respuestas
+    </mat-card-title>
+    <mat-card-content>
+      <ag-grid-angular
+      class="ag-theme-material data-grid"
+      #myGrid
+      [columnDefs]="columnDefs"
+      [defaultColDef]="defaultColDef"
+      [pagination]="true"
+      [paginationAutoPageSize]="true"
+      rowSelection="multiple"
+      [suppressRowClickSelection]="true"
+      [rowData]="rowData"
+      [stopEditingWhenGridLosesFocus]="true"
+      [frameworkComponents]="frameworkComponents"
+      [gridOptions]="gridOptions">
+    </ag-grid-angular>
+    </mat-card-content>
+  </mat-card>
+</div>

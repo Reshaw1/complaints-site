@@ -12,6 +12,8 @@
   <div *ngIf="login && user_Type == 2">
     <button mat-button (click)="onNavComplain()">Quejas</button>
     <button mat-button (click)="onNavClaim()">Reclamaciones</button>
+    <button mat-button (click)="onNavResponse()">Respuestas</button>
+    <button mat-button (click)="onNavLogout()">Logout</button>
   </div>
   <div *ngIf="login && user_Type == 1">
     <button mat-button (click)="onNavMComplain()">Quejas</button>
@@ -21,6 +23,7 @@
     <button mat-button (click)="onNavMClaimType()">Tipo de Reclamacion</button>
     <button mat-button (click)="onNavMClaimState()">Estado de Reclamacion</button>
     <button mat-button (click)="onNavMDepartment()">Departamento</button>
+    <button mat-button (click)="onNavLogout()">Logout</button>
   </div>
    </mat-toolbar-row>
 </mat-toolbar>
