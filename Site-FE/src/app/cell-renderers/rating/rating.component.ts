@@ -4,20 +4,21 @@ import {
   IAfterGuiAttachedParams,
   ICellRendererParams,
 } from "@ag-grid-community/all-modules";
-import { ComplainService } from 'src/app/complains/complain.service';
-import { Department } from 'src/app/models/Department';
 
 @Component({
-  selector: 'app-date',
-  templateUrl: './date.component.html',
-  styleUrls: ['./date.component.scss']
+  selector: 'app-rating',
+  templateUrl: './rating.component.html',
+  styleUrls: ['./rating.component.scss']
 })
-export class DateComponent implements AgRendererComponent {
+export class RatingComponent implements AgRendererComponent {
+
   public cellRendererParams: ICellRendererParams;
 
-  date: Date;
+  rating: string;
 
-  constructor(private complainService: ComplainService) {}
+  ratings: string[] = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ]
+
+  constructor() {}
 
   refresh(params: ICellRendererParams): boolean {
     console.log("refresh");
@@ -30,11 +31,11 @@ export class DateComponent implements AgRendererComponent {
 
   agInit(params: ICellRendererParams): void {
     this.cellRendererParams = params;
-    this.date = new Date(params.value);
-    params.value = this.date;
+    this.rating = params.value;
   }
 
   onSelectionChanged($event) {
-    this.cellRendererParams.setValue(this.date);
+    this.cellRendererParams.setValue(parseInt(this.rating));
   }
+
 }

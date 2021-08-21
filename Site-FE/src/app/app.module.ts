@@ -46,6 +46,7 @@ import { ViewMClaimStateComponent } from './m-claim-state/view-m-claim-state/vie
 import { InsertMClaimStateComponent } from './m-claim-state/insert-m-claim-state/insert-m-claim-state.component';
 import { ViewMClaimTypeComponent } from './m-claim-type/view-m-claim-type/view-m-claim-type.component';
 import { InsertMClaimTypeComponent } from './m-claim-type/insert-m-claim-type/insert-m-claim-type.component';
+import { RatingComponent } from './cell-renderers/rating/rating.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { InsertMClaimTypeComponent } from './m-claim-type/insert-m-claim-type/in
     ViewMClaimStateComponent,
     InsertMClaimStateComponent,
     ViewMClaimTypeComponent,
-    InsertMClaimTypeComponent
+    InsertMClaimTypeComponent,
+    RatingComponent
 
   ],
   imports: [

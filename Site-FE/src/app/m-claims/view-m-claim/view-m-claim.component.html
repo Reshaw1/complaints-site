@@ -33,6 +33,9 @@
         <mat-icon aria-hidden="false" class="nav-icon">add_comment</mat-icon>
         <a class="nav-link text-light" (click)="onDisplayAnswer()">Responder Reclamacion</a>
       </button>
+      <button mat-raised-button class= "save-button" (click)="this.gridOptions.api.exportDataAsCsv()">
+        <a class="nav-link text-light">Exportar</a>
+      </button>
     </div>
 
     </mat-card-content>

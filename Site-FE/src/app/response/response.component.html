@@ -16,8 +16,19 @@
       [rowData]="rowData"
       [stopEditingWhenGridLosesFocus]="true"
       [frameworkComponents]="frameworkComponents"
+      (cellValueChanged)="onCellValueChanged($event)"
       [gridOptions]="gridOptions">
     </ag-grid-angular>
+
+    <div class="grid-buttons">
+      <button mat-raised-button class= "save-button" *ngIf="gridEdited == true" (click)="onSaveChanges()">
+        <a class="nav-link text-light">Guardar Cambios</a>
+      </button>
+      <button mat-raised-button class= "save-button" (click)="this.gridOptions.api.exportDataAsCsv()">
+        <a class="nav-link text-light">Exportar</a>
+      </button>
+    </div>
+
     </mat-card-content>
   </mat-card>
 </div>

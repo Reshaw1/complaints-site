@@ -257,6 +257,7 @@ export class ViewMClaimComponent implements OnInit {
     this.response.claim = new Claim;
     this.response.date = new Date;
     this.response.person = new Person;
+    this.response.rating = 5;
     var selectedRows = this.gridOptions.api.getSelectedRows();
     this.response.person.ID = this.personId;
     this.response.claim.ID = parseInt(selectedRows[0].ID);

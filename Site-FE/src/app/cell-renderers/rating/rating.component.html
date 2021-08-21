@@ -1,0 +1,5 @@
+<mat-select name="rating" [(value)]="rating" (selectionChange)="onSelectionChanged($event)" required>
+  <mat-option *ngFor="let item of ratings" [value]="item">
+      {{item}}
+  </mat-option>
+</mat-select>

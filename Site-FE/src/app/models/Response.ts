@@ -7,4 +7,5 @@ export class CResponse {
   content: string
   person: Person
   claim: Claim
+  rating: number
 }

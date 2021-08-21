@@ -15,6 +15,8 @@ namespace Complaints_BE.Models
         public Person person { get; set; }
         public Claim claim { get; set; }
 
+        public int rating { get; set; }
+
         public string IDCol = "RESPONSE_ID";
 
         public string colsID = @"
@@ -22,27 +24,31 @@ namespace Complaints_BE.Models
 	    RESPONSE_CONTENT,
 	    RESPONSE_DATE,
 	    CLAIM_ID,
-	    PERSON_ID";
+	    PERSON_ID,
+        RATING";
 
         public string cols = @"
 	    RESPONSE_CONTENT,
 	    RESPONSE_DATE,
 	    CLAIM_ID,
-	    PERSON_ID";
+	    PERSON_ID,
+        RATING";
 
         public string values()
         {
             return $@"'{content}',
             '{date}',
             '{claim.ID}',
-            '{person.ID}'";
+            '{person.ID}',
+            '{rating}'";
         }
         public string changes()
         {
             return $@"RESPONSE_CONTENT = '{content}',
             RESPONSE_DATE = '{date}',
             CLAIM_ID = '{claim.ID}',
-            PERSON_ID = '{person.ID}'";
+            PERSON_ID = '{person.ID}',
+            RATING = '{rating}'";
         }
     }
 }
